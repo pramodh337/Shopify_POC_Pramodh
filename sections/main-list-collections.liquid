@@ -1,0 +1,22 @@
+<div class="collections-list page-width">
+  <h1>Shop by Category</h1>
+  <div class="collections-list__grid">
+    {%- for collection in collections -%}
+      <a href="{{ collection.url }}" class="collections-list__item">
+        {%- if collection.featured_image -%}
+          <img
+            src="{{ collection.featured_image | image_url: width: 300 }}"
+            width="{{ collection.featured_image.width }}"
+            height="{{ collection.featured_image.height }}"
+            alt="{{ collection.title | escape }}"
+            loading="lazy">
+        {%- endif -%}
+        <span>{{ collection.title }}</span>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Collections list", "settings": [] }
+{% endschema %}

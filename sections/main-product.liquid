@@ -1,0 +1,96 @@
+<div class="product-page page-width">
+  <div class="product-page__gallery">
+    {%- assign main_image = product.selected_or_first_available_variant.featured_image | default: product.featured_image -%}
+    <div class="product-page__main-image">
+      <img
+        id="ProductMainImage"
+        src="{{ main_image | image_url: width: 700 }}"
+        width="{{ main_image.width }}"
+        height="{{ main_image.height }}"
+        alt="{{ product.title | escape }}">
+    </div>
+    {%- if product.images.size > 1 -%}
+    <div class="product-page__thumbs">
+      {%- for image in product.images -%}
+        <button class="product-page__thumb {% if forloop.first %}is-active{% endif %}" data-full-src="{{ image | image_url: width: 700 }}">
+          <img
+            src="{{ image | image_url: width: 120 }}"
+            width="{{ image.width }}"
+            height="{{ image.height }}"
+            alt="{{ image.alt | escape }}"
+            loading="lazy">
+        </button>
+      {%- endfor -%}
+    </div>
+    {%- endif -%}
+  </div>
+
+  <div class="product-page__info">
+    {%- if settings.show_vendor -%}<p class="product-page__vendor">{{ product.vendor }}</p>{%- endif -%}
+    <h1>{{ product.title }}</h1>
+
+    <div class="product-page__price" id="ProductPrice">
+      <span class="price price--sale">{{ product.selected_or_first_available_variant.price | money }}</span>
+      {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+        <span class="price price--compare">{{ product.selected_or_first_available_variant.compare_at_price | money }}</span>
+      {%- endif -%}
+    </div>
+
+    {%- form 'product', product, id: 'ProductForm' -%}
+      {%- unless product.has_only_default_variant -%}
+        {%- for option in product.options_with_values -%}
+          <div class="product-page__option">
+            <label>{{ option.name }}</label>
+            <select name="option-{{ forloop.index0 }}" class="product-option-select">
+              {%- for value in option.values -%}
+                <option value="{{ value | escape }}">{{ value }}</option>
+              {%- endfor -%}
+            </select>
+          </div>
+        {%- endfor -%}
+      {%- endunless -%}
+
+      <input type="hidden" name="id" id="ProductSelectedVariant" value="{{ product.selected_or_first_available_variant.id }}">
+
+      <div class="product-page__quantity">
+        <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
+        <div class="quantity-selector">
+          <button type="button" data-qty-minus>&minus;</button>
+          <input type="number" id="Quantity" name="quantity" value="1" min="1">
+          <button type="button" data-qty-plus>&plus;</button>
+        </div>
+      </div>
+
+      <button type="submit" name="add" class="btn btn--primary btn--large btn--full" {% unless product.available %}disabled{% endunless %}>
+        {%- if product.available -%}{{ 'products.product.add_to_cart' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+      </button>
+    {%- endform -%}
+
+    {%- if product.description != blank -%}
+      <div class="product-page__description">
+        <h3>{{ 'products.product.description' | t }}</h3>
+        {{ product.description }}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- if section.settings.show_related and recommendations.performed -%}
+<div class="page-width">
+  <h2 class="section-heading">{{ 'products.product.you_may_also_like' | t }}</h2>
+  <div class="product-row">
+    {%- for rec in recommendations.products -%}
+      <div class="product-row__item">{% render 'product-card', product: rec %}</div>
+    {%- endfor -%}
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product page",
+  "settings": [
+    { "type": "checkbox", "id": "show_related", "label": "Show related products", "default": true }
+  ]
+}
+{% endschema %}

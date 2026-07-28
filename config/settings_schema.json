@@ -1,0 +1,54 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Pramodh Grocery",
+    "theme_version": "1.0.0",
+    "theme_author": "Custom Build",
+    "theme_documentation_url": "https://pramodh.example.com",
+    "theme_support_email": "support@pramodh.example.com"
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo image" },
+      { "type": "range", "id": "logo_width", "min": 80, "max": 260, "step": 10, "default": 150, "unit": "px", "label": "Logo width" },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_primary", "label": "Primary (green)", "default": "#1E7A34" },
+      { "type": "color", "id": "color_primary_dark", "label": "Primary dark", "default": "#145C26" },
+      { "type": "color", "id": "color_accent_red", "label": "Accent red", "default": "#E12026" },
+      { "type": "color", "id": "color_accent_yellow", "label": "Accent yellow/gold", "default": "#F5C518" },
+      { "type": "color", "id": "color_text", "label": "Body text", "default": "#222222" },
+      { "type": "color", "id": "color_background", "label": "Page background", "default": "#FFFFFF" }
+    ]
+  },
+  {
+    "name": "Top bar",
+    "settings": [
+      { "type": "checkbox", "id": "show_announcement", "label": "Show announcement bar", "default": true },
+      { "type": "text", "id": "announcement_1", "label": "Message 1", "default": "Free Delivery on orders over £50" },
+      { "type": "text", "id": "announcement_2", "label": "Message 2", "default": "Same Day Delivery in Select Areas*" },
+      { "type": "text", "id": "announcement_3", "label": "Message 3", "default": "WhatsApp Support 07700 123456" }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      { "type": "text", "id": "social_facebook", "label": "Facebook URL" },
+      { "type": "text", "id": "social_instagram", "label": "Instagram URL" },
+      { "type": "text", "id": "social_twitter", "label": "Twitter / X URL" },
+      { "type": "text", "id": "social_whatsapp", "label": "WhatsApp number (with country code)" }
+    ]
+  },
+  {
+    "name": "Product cards",
+    "settings": [
+      { "type": "checkbox", "id": "show_vendor", "label": "Show product vendor", "default": false },
+      { "type": "checkbox", "id": "show_badge", "label": "Show sale % badge", "default": true }
+    ]
+  }
+]

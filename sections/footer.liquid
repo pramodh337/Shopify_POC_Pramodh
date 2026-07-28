@@ -1,0 +1,84 @@
+<footer class="site-footer">
+  <div class="site-footer__top">
+    <div class="site-footer__col site-footer__col--brand">
+      {%- if settings.logo != blank -%}
+        <img
+          src="{{ settings.logo | image_url: width: 240 }}"
+          width="{{ settings.logo.width }}"
+          height="{{ settings.logo.height }}"
+          style="width: 140px; height: auto;"
+          alt="{{ shop.name }}"
+          loading="lazy">
+      {%- else -%}
+        <span class="site-header__logo-text">{{ shop.name }}</span>
+      {%- endif -%}
+      <p>{{ section.settings.about_text }}</p>
+      <div class="site-footer__socials">
+        {%- if settings.social_facebook != blank -%}<a href="{{ settings.social_facebook }}" aria-label="Facebook">FB</a>{%- endif -%}
+        {%- if settings.social_instagram != blank -%}<a href="{{ settings.social_instagram }}" aria-label="Instagram">IG</a>{%- endif -%}
+        {%- if settings.social_twitter != blank -%}<a href="{{ settings.social_twitter }}" aria-label="Twitter">X</a>{%- endif -%}
+      </div>
+    </div>
+
+    <div class="site-footer__col">
+      <h4>Shop</h4>
+      <ul>
+        {%- for link in linklists.footer.links -%}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {%- else -%}
+          <li><a href="{{ routes.all_products_collection_url }}">All Products</a></li>
+          <li><a href="{{ collections['offers'].url | default: routes.all_products_collection_url }}">Offers</a></li>
+          <li><a href="{{ collections['new-arrivals'].url | default: routes.all_products_collection_url }}">New Arrivals</a></li>
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    <div class="site-footer__col">
+      <h4>Customer Care</h4>
+      <ul>
+        <li><a href="{{ pages['contact'].url | default: '#' }}">Contact Us</a></li>
+        <li><a href="{{ pages['faq'].url | default: '#' }}">FAQs</a></li>
+        <li><a href="{{ pages['shipping-returns'].url | default: '#' }}">Shipping &amp; Returns</a></li>
+        <li><a href="{{ pages['track-order'].url | default: '#' }}">Track Order</a></li>
+      </ul>
+    </div>
+
+    <div class="site-footer__col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="{{ pages['about-us'].url | default: '#' }}">About Us</a></li>
+        {%- if shop.privacy_policy -%}<li><a href="{{ shop.privacy_policy.url }}">Privacy Policy</a></li>{%- endif -%}
+        {%- if shop.terms_of_service -%}<li><a href="{{ shop.terms_of_service.url }}">Terms of Service</a></li>{%- endif -%}
+      </ul>
+    </div>
+
+    <div class="site-footer__col site-footer__col--newsletter">
+      <h4>Get Weekly Offers</h4>
+      <p>Sign up for exclusive deals and fresh arrivals.</p>
+      {% form 'customer' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="footer-newsletter">
+          <input type="email" name="contact[email]" placeholder="Your email" required>
+          <button type="submit" class="btn btn--primary">Subscribe</button>
+        </div>
+        {%- if form.posted_successfully? -%}
+          <p class="footer-newsletter__success">Thanks for subscribing!</p>
+        {%- endif -%}
+      {% endform %}
+    </div>
+  </div>
+
+  <div class="site-footer__bottom">
+    <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+    <p>Built for {{ shop.name }} on Shopify</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "textarea", "id": "about_text", "label": "About text", "default": "Fresh groceries, trusted quality, delivered to your door." }
+  ]
+}
+{% endschema %}

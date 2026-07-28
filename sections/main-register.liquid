@@ -1,0 +1,21 @@
+<div class="customer-page page-width customer-page--narrow">
+  <h1>Create Account</h1>
+  {%- form 'create_customer' -%}
+    {%- if form.errors -%}
+      <div class="form-errors">{{ form.errors | default_errors }}</div>
+    {%- endif -%}
+    <label for="RegFirstName">First name</label>
+    <input type="text" name="customer[first_name]" id="RegFirstName">
+    <label for="RegLastName">Last name</label>
+    <input type="text" name="customer[last_name]" id="RegLastName">
+    <label for="RegEmail">Email</label>
+    <input type="email" name="customer[email]" id="RegEmail" required>
+    <label for="RegPassword">Password</label>
+    <input type="password" name="customer[password]" id="RegPassword" required>
+    <button type="submit" class="btn btn--primary btn--full">Create Account</button>
+  {%- endform -%}
+</div>
+
+{% schema %}
+{ "name": "Customer register", "settings": [] }
+{% endschema %}

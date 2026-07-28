@@ -1,0 +1,21 @@
+<div class="customer-page page-width customer-page--narrow">
+  <h1>{{ 'customer.login.title' | t }}</h1>
+  {%- form 'customer_login' -%}
+    {%- if form.errors -%}
+      <div class="form-errors">{{ form.errors | default_errors }}</div>
+    {%- endif -%}
+    <label for="CustomerEmail">{{ 'customer.login.email' | t }}</label>
+    <input type="email" name="customer[email]" id="CustomerEmail" required>
+
+    <label for="CustomerPassword">{{ 'customer.login.password' | t }}</label>
+    <input type="password" name="customer[password]" id="CustomerPassword" required>
+
+    <button type="submit" class="btn btn--primary btn--full">{{ 'customer.login.submit' | t }}</button>
+    <a href="{{ routes.account_recover_url }}">{{ 'customer.login.forgot_password' | t }}</a>
+    <a href="{{ routes.account_register_url }}" class="btn btn--outline btn--full">{{ 'customer.login.create_account' | t }}</a>
+  {%- endform -%}
+</div>
+
+{% schema %}
+{ "name": "Customer login", "settings": [] }
+{% endschema %}

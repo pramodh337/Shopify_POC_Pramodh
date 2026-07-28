@@ -1,0 +1,80 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  <meta name="theme-color" content="{{ settings.color_primary }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
+
+  <title>
+    {{ page_title }}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
+
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+
+  {{ content_for_header }}
+
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+  <style>
+    :root{
+      --color-primary: {{ settings.color_primary }};
+      --color-primary-dark: {{ settings.color_primary_dark }};
+      --color-accent-red: {{ settings.color_accent_red }};
+      --color-accent-yellow: {{ settings.color_accent_yellow }};
+      --color-text: {{ settings.color_text }};
+      --color-bg: {{ settings.color_background }};
+      --color-border: #e5e7e5;
+      --font-heading: 'Baloo 2', sans-serif;
+      --font-body: 'Poppins', sans-serif;
+      --page-width: 1400px;
+    }
+  </style>
+</head>
+
+<body class="template-{{ request.page_type | handleize }}">
+
+  <a class="skip-to-content" href="#MainContent">Skip to content</a>
+
+  {% section 'announcement-bar' %}
+  {% section 'header' %}
+
+  <main id="MainContent" role="main">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  <div id="cart-drawer" class="cart-drawer" aria-hidden="true">
+    <div class="cart-drawer__overlay" data-cart-close></div>
+    <div class="cart-drawer__panel">
+      <div class="cart-drawer__header">
+        <h2>Your Cart</h2>
+        <button class="cart-drawer__close" data-cart-close aria-label="Close cart">&times;</button>
+      </div>
+      <div class="cart-drawer__items" id="CartDrawerItems"></div>
+      <div class="cart-drawer__footer">
+        <div class="cart-drawer__subtotal">
+          <span>Subtotal</span>
+          <span id="CartDrawerSubtotal">{{ cart.total_price | money }}</span>
+        </div>
+        <a href="{{ routes.cart_url }}" class="btn btn--outline btn--full">View Cart</a>
+        <a href="{{ routes.cart_url }}/checkout" class="btn btn--primary btn--full">Checkout</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

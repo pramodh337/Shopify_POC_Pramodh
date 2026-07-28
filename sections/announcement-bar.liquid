@@ -1,0 +1,21 @@
+{%- if settings.show_announcement -%}
+<div class="announcement-bar">
+  <div class="announcement-bar__item">
+    {% render 'icon-truck' %} {{ settings.announcement_1 }}
+  </div>
+  <div class="announcement-bar__item announcement-bar__item--center">
+    {% render 'icon-clock' %} {{ settings.announcement_2 }}
+  </div>
+  <div class="announcement-bar__item">
+    {% render 'icon-chat' %} {{ settings.announcement_3 }}
+  </div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [],
+  "presets": [{ "name": "Announcement bar" }]
+}
+{% endschema %}

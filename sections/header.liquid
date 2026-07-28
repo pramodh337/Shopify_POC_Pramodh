@@ -1,0 +1,97 @@
+<header class="site-header">
+  <div class="site-header__top">
+    <a href="{{ routes.root_url }}" class="site-header__logo">
+      {%- if settings.logo != blank -%}
+        <img
+          src="{{ settings.logo | image_url: width: 300 }}"
+          width="{{ settings.logo.width }}"
+          height="{{ settings.logo.height }}"
+          style="width: {{ settings.logo_width }}px; height: auto;"
+          alt="{{ shop.name }}"
+          loading="eager">
+      {%- else -%}
+        <span class="site-header__logo-text">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <form action="{{ routes.search_url }}" method="get" role="search" class="site-header__search">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="Search">
+      <button type="submit" aria-label="Search">{% render 'icon-search' %}</button>
+    </form>
+
+    <div class="site-header__actions">
+      <div class="site-header__deliver">
+        {% render 'icon-pin' %}
+        <div>
+          <span class="site-header__deliver-label">Deliver to</span>
+          <strong>{{ settings.deliver_to | default: 'Your area' }}</strong>
+        </div>
+        {% render 'icon-chevron-down' %}
+      </div>
+
+      {%- if shop.customer_accounts_enabled -%}
+      <a href="{{ routes.account_url }}" class="site-header__action">
+        {% render 'icon-user' %}
+        <span>{% if customer %}Account{% else %}Sign in{% endif %}</span>
+      </a>
+      {%- endif -%}
+
+      <a href="{{ routes.search_url }}?type=product" class="site-header__action site-header__action--wishlist">
+        {% render 'icon-heart' %}
+        <span class="badge">0</span>
+        <span>Wishlist</span>
+      </a>
+
+      <a href="{{ routes.cart_url }}" class="site-header__action site-header__action--cart" id="CartIconTrigger">
+        {% render 'icon-cart' %}
+        <span class="badge">{{ cart.item_count }}</span>
+        <span>Cart<br><small>{{ cart.total_price | money }}</small></span>
+      </a>
+    </div>
+  </div>
+
+  <nav class="site-header__nav">
+    <button class="site-header__nav-toggle" id="CategoryMenuToggle">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      Shop by Category
+    </button>
+
+    <ul class="site-header__nav-list">
+      {%- for link in linklists.main-menu.links -%}
+        <li class="{% if link.links != blank %}has-dropdown{% endif %}">
+          <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- if link.links != blank -%}
+          <ul class="dropdown">
+            {%- for child in link.links -%}
+              <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+          {%- endif -%}
+        </li>
+      {%- else -%}
+        <li><a href="{{ collections['fresh-vegetables'].url | default: routes.all_products_collection_url }}">Fresh Vegetables</a></li>
+        <li><a href="{{ collections['fruits'].url | default: routes.all_products_collection_url }}">Fruits</a></li>
+        <li><a href="{{ collections['rice-grains'].url | default: routes.all_products_collection_url }}">Rice &amp; Grains</a></li>
+        <li><a href="{{ collections['atta-flour'].url | default: routes.all_products_collection_url }}">Atta &amp; Flour</a></li>
+        <li><a href="{{ collections['dal-pulses'].url | default: routes.all_products_collection_url }}">Dal &amp; Pulses</a></li>
+        <li><a href="{{ collections['spices'].url | default: routes.all_products_collection_url }}">Spices</a></li>
+        <li><a href="{{ collections['snacks'].url | default: routes.all_products_collection_url }}">Snacks</a></li>
+        <li><a href="{{ collections['frozen-foods'].url | default: routes.all_products_collection_url }}">Frozen Foods</a></li>
+      {%- endfor -%}
+    </ul>
+
+    <div class="site-header__nav-tags">
+      <a href="{{ collections['offers'].url | default: routes.all_products_collection_url }}" class="tag tag--red">🔥 Offers</a>
+      <a href="{{ collections['new-arrivals'].url | default: routes.all_products_collection_url }}" class="tag tag--yellow">New Arrivals</a>
+    </div>
+  </nav>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "text", "id": "deliver_to", "label": "Default delivery area", "default": "M1 1AE" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,44 @@
+{%- comment -%} Expects: product {%- endcomment -%}
+<div class="product-card">
+  <a href="{{ product.url }}" class="product-card__image-link">
+    {%- if product.compare_at_price > product.price and settings.show_badge -%}
+      {%- assign discount = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price -%}
+      <span class="product-card__badge">{{ discount | round }}% OFF</span>
+    {%- endif -%}
+    <button class="product-card__wishlist" aria-label="Add to wishlist" data-wishlist-toggle>
+      {% render 'icon-heart' %}
+    </button>
+    {%- if product.featured_image -%}
+      <img src="{{ product.featured_image | image_url: width: 400 }}"
+           width="{{ product.featured_image.width }}"
+           height="{{ product.featured_image.height }}"
+           alt="{{ product.featured_image.alt | escape }}"
+           loading="lazy"
+           class="product-card__image"
+           onmouseover="if(this.dataset.hover){this.src=this.dataset.hover}"
+           {% if product.images.size > 1 %}data-hover="{{ product.images[1] | image_url: width: 400 }}"{% endif %}>
+    {%- else -%}
+      <div class="product-card__image product-card__image--placeholder">{{ 'product-1' | placeholder_svg_tag }}</div>
+    {%- endif -%}
+  </a>
+  <div class="product-card__info">
+    {%- if settings.show_vendor -%}<span class="product-card__vendor">{{ product.vendor }}</span>{%- endif -%}
+    <a href="{{ product.url }}" class="product-card__title">{{ product.title }}</a>
+    <div class="product-card__price">
+      <span class="price price--sale">{{ product.price | money }}</span>
+      {%- if product.compare_at_price > product.price -%}
+        <span class="price price--compare">{{ product.compare_at_price | money }}</span>
+      {%- endif -%}
+    </div>
+    {%- if product.available -%}
+      {%- form 'product', product -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <button type="submit" class="btn btn--primary btn--small btn--full" name="add">
+          {{ 'products.product.add_to_cart' | t }}
+        </button>
+      {%- endform -%}
+    {%- else -%}
+      <button class="btn btn--disabled btn--small btn--full" disabled>{{ 'products.product.sold_out' | t }}</button>
+    {%- endif -%}
+  </div>
+</div>

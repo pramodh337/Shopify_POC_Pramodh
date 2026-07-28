@@ -1,0 +1,17 @@
+{
+  "current": {
+    "color_primary": "#1E7A34",
+    "color_primary_dark": "#145C26",
+    "color_accent_red": "#E12026",
+    "color_accent_yellow": "#F5C518",
+    "color_text": "#222222",
+    "color_background": "#FFFFFF",
+    "logo_width": 150,
+    "show_announcement": true,
+    "announcement_1": "Free Delivery on orders over £50",
+    "announcement_2": "Same Day Delivery in Select Areas*",
+    "announcement_3": "WhatsApp Support 07700 123456",
+    "show_vendor": false,
+    "show_badge": true
+  }
+}

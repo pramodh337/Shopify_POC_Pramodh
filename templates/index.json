@@ -1,0 +1,77 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-slideshow",
+      "blocks": {
+        "slide1": {
+          "type": "slide",
+          "settings": {
+            "badge_text": "UP TO 20% OFF",
+            "heading": "Freshness You Can Trust",
+            "subheading": "Wide range of fresh vegetables delivered to your door",
+            "bg_color": "#DFF0D8",
+            "button_1_text": "Shop Now",
+            "button_1_link": "/collections/all",
+            "button_2_text": "View Offers",
+            "button_2_link": "/collections/offers"
+          }
+        }
+      },
+      "block_order": ["slide1"]
+    },
+    "categories": {
+      "type": "category-grid",
+      "blocks": {
+        "c1": { "type": "category", "settings": { "title": "Fresh Vegetables", "link": "/collections/fresh-vegetables" } },
+        "c2": { "type": "category", "settings": { "title": "Fruits", "link": "/collections/fruits" } },
+        "c3": { "type": "category", "settings": { "title": "Rice & Grains", "link": "/collections/rice-grains" } },
+        "c4": { "type": "category", "settings": { "title": "Atta & Flour", "link": "/collections/atta-flour" } },
+        "c5": { "type": "category", "settings": { "title": "Dal & Pulses", "link": "/collections/dal-pulses" } },
+        "c6": { "type": "category", "settings": { "title": "Spices", "link": "/collections/spices" } },
+        "c7": { "type": "category", "settings": { "title": "Snacks", "link": "/collections/snacks" } },
+        "c8": { "type": "category", "settings": { "title": "Tea & Coffee", "link": "/collections/tea-coffee" } }
+      },
+      "block_order": ["c1","c2","c3","c4","c5","c6","c7","c8"]
+    },
+    "features": {
+      "type": "features-bar",
+      "blocks": {
+        "f1": { "type": "feature", "settings": { "icon": "leaf", "icon_bg": "#1E7A34", "title": "Fresh Products", "subtitle": "Sourced daily from trusted suppliers" } },
+        "f2": { "type": "feature", "settings": { "icon": "truck", "icon_bg": "#E12026", "title": "Fast Delivery", "subtitle": "Quick & reliable delivery to your door" } },
+        "f3": { "type": "feature", "settings": { "icon": "lock", "icon_bg": "#F5C518", "title": "Secure Payments", "subtitle": "100% secure payment options" } },
+        "f4": { "type": "feature", "settings": { "icon": "shield", "icon_bg": "#0EA5A0", "title": "Trusted Quality", "subtitle": "Premium quality you can trust" } }
+      },
+      "block_order": ["f1","f2","f3","f4"]
+    },
+    "best_sellers": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Best Sellers",
+        "products_to_show": 6
+      }
+    },
+    "promo": {
+      "type": "promo-banner",
+      "settings": {
+        "heading": "WEEKLY OFFERS",
+        "subheading": "Amazing Deals on Your Favourite Products",
+        "button_text": "Shop Now",
+        "button_link": "/collections/offers",
+        "bg_color": "#F5C518"
+      }
+    },
+    "brands": {
+      "type": "brand-strip",
+      "blocks": {
+        "b1": { "type": "brand", "settings": { "name": "Aashirvaad" } },
+        "b2": { "type": "brand", "settings": { "name": "Tata" } },
+        "b3": { "type": "brand", "settings": { "name": "India Gate" } },
+        "b4": { "type": "brand", "settings": { "name": "Fortune" } },
+        "b5": { "type": "brand", "settings": { "name": "MDH" } },
+        "b6": { "type": "brand", "settings": { "name": "BRU" } }
+      },
+      "block_order": ["b1","b2","b3","b4","b5","b6"]
+    }
+  },
+  "order": ["hero", "categories", "features", "best_sellers", "promo", "brands"]
+}
