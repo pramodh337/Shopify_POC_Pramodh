@@ -6,36 +6,79 @@
     {%- endif -%}
   </div>
 
-  <div class="collection-page__toolbar">
-    <span>{{ collection.products_count }} products</span>
-    <form id="SortForm">
-      <label for="SortBy">{{ 'collections.general.sort_by' | t }}</label>
-      <select name="sort_by" id="SortBy" onchange="window.location.href=this.value">
-        {%- assign sort_options = 'manual,best-selling,title-ascending,title-descending,price-ascending,price-descending,created-descending' | split: ',' -%}
-        {%- for option in sort_options -%}
-          <option value="{{ collection.url }}?sort_by={{ option }}" {% if collection.sort_by == option or collection.default_sort_by == option and collection.sort_by == blank %}selected{% endif %}>
-            {{ option | replace: '-', ' ' | capitalize }}
-          </option>
+  {%- paginate collection.products by 24 -%}
+  <form id="FacetFilterForm" method="get">
+    <div class="collection-page__toolbar">
+      <span>{{ collection.products_count }} products</span>
+      <label for="SortBy">
+        {{ 'collections.general.sort_by' | t }}
+        <select name="sort_by" id="SortBy" onchange="this.form.submit()">
+          {%- assign sort_options = 'manual,best-selling,title-ascending,title-descending,price-ascending,price-descending,created-descending' | split: ',' -%}
+          {%- for option in sort_options -%}
+            <option value="{{ option }}" {% if collection.sort_by == option or collection.default_sort_by == option and collection.sort_by == blank %}selected{% endif %}>
+              {{ option | replace: '-', ' ' | capitalize }}
+            </option>
+          {%- endfor -%}
+        </select>
+      </label>
+    </div>
+
+    <div class="collection-page__layout">
+      <aside class="collection-page__filters">
+        {%- for filter in collection.filters -%}
+          <details class="facet" open>
+            <summary>{{ filter.label }}</summary>
+            <div class="facet__body">
+              {%- case filter.type -%}
+                {%- when 'price_range' -%}
+                  <div class="facet__price-range">
+                    <input type="number" inputmode="decimal" name="{{ filter.min_value.param_name }}" placeholder="{{ filter.range_min | money_without_currency }}" value="{{ filter.min_value.value }}">
+                    <span>to</span>
+                    <input type="number" inputmode="decimal" name="{{ filter.max_value.param_name }}" placeholder="{{ filter.range_max | money_without_currency }}" value="{{ filter.max_value.value }}">
+                  </div>
+                {%- else -%}
+                  <ul>
+                    {%- for value in filter.values -%}
+                      <li>
+                        <label>
+                          <input
+                            type="checkbox"
+                            name="{{ value.param_name }}"
+                            value="{{ value.value }}"
+                            onchange="this.form.submit()"
+                            {% if value.active %}checked{% endif %}
+                            {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                          {{ value.label }} ({{ value.count }})
+                        </label>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+              {%- endcase -%}
+            </div>
+          </details>
         {%- endfor -%}
-      </select>
-    </form>
-  </div>
+        {%- if collection.filters.size > 0 -%}
+          <button type="submit" class="btn btn--primary btn--small btn--full">Apply filters</button>
+          <a href="{{ collection.url }}{% if collection.sort_by %}?sort_by={{ collection.sort_by }}{% endif %}" class="collection-page__clear-filters">Clear all</a>
+        {%- endif -%}
+      </aside>
 
-  <div class="collection-page__grid">
-    {%- paginate collection.products by 24 -%}
-      {%- for product in collection.products -%}
-        {% render 'product-card', product: product %}
-      {%- else -%}
-        <p>{{ 'collections.general.no_products' | t }}</p>
-      {%- endfor -%}
-
-      {%- if paginate.pages > 1 -%}
-      <div class="pagination">
-        {{ paginate | default_pagination }}
+      <div class="collection-page__grid">
+        {%- for product in collection.products -%}
+          {% render 'product-card', product: product %}
+        {%- else -%}
+          <p>{{ 'collections.general.no_products' | t }}</p>
+        {%- endfor -%}
       </div>
-      {%- endif -%}
-    {%- endpaginate -%}
+    </div>
+  </form>
+
+  {%- if paginate.pages > 1 -%}
+  <div class="pagination">
+    {{ paginate | default_pagination }}
   </div>
+  {%- endif -%}
+  {%- endpaginate -%}
 </div>
 
 {% schema %}

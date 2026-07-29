@@ -27,7 +27,7 @@
           <li><a href="{{ link.url }}">{{ link.title }}</a></li>
         {%- else -%}
           <li><a href="{{ routes.all_products_collection_url }}">All Products</a></li>
-          <li><a href="{{ collections['offers'].url | default: routes.all_products_collection_url }}">Offers</a></li>
+          <li><a href="{{ collections['offers'].url | default: '/collections/offers' }}">Offers</a></li>
           <li><a href="{{ collections['new-arrivals'].url | default: routes.all_products_collection_url }}">New Arrivals</a></li>
         {%- endfor -%}
       </ul>
