@@ -71,6 +71,7 @@ ul { list-style: none; margin: 0; padding: 0; }
    ========================================================================== */
 .site-header__top {
   display: flex; align-items: center; gap: 24px;
+  max-width: var(--page-width); margin: 0 auto;
   padding: 16px 24px; flex-wrap: wrap;
 }
 .site-header__logo-text {
@@ -106,7 +107,8 @@ ul { list-style: none; margin: 0; padding: 0; }
 
 .site-header__nav {
   background: var(--color-primary); color: #fff;
-  display: flex; align-items: center; gap: 24px; padding: 0 24px;
+  display: flex; align-items: center; gap: 24px;
+  padding: 0 max(24px, calc((100% - var(--page-width)) / 2));
 }
 .site-header__category { position: relative; }
 .site-header__nav-toggle {
