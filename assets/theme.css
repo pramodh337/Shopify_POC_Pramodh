@@ -390,13 +390,14 @@ ul { list-style: none; margin: 0; padding: 0; }
   .site-footer__top { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 640px) {
-  .site-header__top { padding: 10px 12px; gap: 10px; }
-  .site-header__logo img { max-width: 100px !important; }
+  .site-header__top { padding: 10px 12px; gap: 8px; flex-wrap: nowrap; }
+  .site-header__logo { flex-shrink: 0; }
+  .site-header__logo img { max-width: 80px !important; }
   .site-header__logo-text { font-size: 20px; padding: 4px 12px; }
-  .site-header__search { order: 3; flex-basis: 100%; }
-  .site-header__search input { padding: 9px 12px; font-size: 13px; }
-  .site-header__search button { padding: 0 12px; }
-  .site-header__actions { gap: 12px; }
+  .site-header__search { order: 0; flex-basis: auto; min-width: 0; max-width: none; }
+  .site-header__search input { padding: 9px 10px; font-size: 13px; min-width: 0; }
+  .site-header__search button { padding: 0 12px; flex-shrink: 0; }
+  .site-header__actions { gap: 10px; flex-shrink: 0; }
   .site-header__deliver { display: none; }
   .site-header__action { font-size: 11px; gap: 4px; }
   .site-header__action .icon { width: 18px; height: 18px; }
