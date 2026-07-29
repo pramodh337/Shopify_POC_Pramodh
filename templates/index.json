@@ -26,24 +26,21 @@
           }
         },
         "slide_pBwg7n": {
-          "type": "slide",
+          "type": "image_slide",
           "settings": {
-            "image_only": true,
-            "image_link": ""
+            "link": ""
           }
         },
         "slide_X4NjFC": {
-          "type": "slide",
+          "type": "image_slide",
           "settings": {
-            "image_only": true,
-            "image_link": ""
+            "link": ""
           }
         },
         "slide1": {
-          "type": "slide",
+          "type": "image_slide",
           "settings": {
-            "image_only": true,
-            "image_link": ""
+            "link": ""
           }
         }
       },

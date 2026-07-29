@@ -1,49 +1,51 @@
 <div class="hero-slideshow" id="HeroSlideshow-{{ section.id }}">
   <div class="hero-slideshow__track">
     {%- for block in section.blocks -%}
-    <div class="hero-slide {% if forloop.first %}is-active{% endif %}{% if block.settings.image_only %} hero-slide--image-only{% endif %}" style="background-color:{{ block.settings.bg_color }};" {{ block.shopify_attributes }}>
-      {%- if block.settings.image_only -%}
-        <a href="{{ block.settings.image_link }}" class="hero-slide__full-link">
-          {%- if block.settings.image != blank -%}
-            <img
-              src="{{ block.settings.image | image_url: width: 1600 }}"
-              width="{{ block.settings.image.width }}"
-              height="{{ block.settings.image.height }}"
-              alt="{{ block.settings.heading | escape }}"
-              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-              class="hero-slide__full-image">
-          {%- endif -%}
-        </a>
+      {%- if block.type == 'image_slide' -%}
+        <div class="hero-slide hero-slide--image-only {% if forloop.first %}is-active{% endif %}" {{ block.shopify_attributes }}>
+          <a href="{{ block.settings.link }}" class="hero-slide__full-link">
+            {%- if block.settings.image != blank -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 1600 }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                alt="{{ block.settings.image.alt | default: 'Promotional slide' | escape }}"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                class="hero-slide__full-image">
+            {%- endif -%}
+          </a>
+        </div>
       {%- else -%}
-        <div class="hero-slide__content">
-          {%- if block.settings.badge_text != blank -%}
-            <div class="hero-slide__badge">
-              <span>{{ block.settings.badge_text }}</span>
+        <div class="hero-slide {% if forloop.first %}is-active{% endif %}" style="background-color:{{ block.settings.bg_color }};" {{ block.shopify_attributes }}>
+          <div class="hero-slide__content">
+            {%- if block.settings.badge_text != blank -%}
+              <div class="hero-slide__badge">
+                <span>{{ block.settings.badge_text }}</span>
+              </div>
+            {%- endif -%}
+            <h2>{{ block.settings.heading }}</h2>
+            <p>{{ block.settings.subheading }}</p>
+            <div class="hero-slide__buttons">
+              {%- if block.settings.button_1_text != blank -%}
+                <a href="{{ block.settings.button_1_link }}" class="btn btn--primary">{{ block.settings.button_1_text }}</a>
+              {%- endif -%}
+              {%- if block.settings.button_2_text != blank -%}
+                <a href="{{ block.settings.button_2_link }}" class="btn btn--outline">{{ block.settings.button_2_text }}</a>
+              {%- endif -%}
+            </div>
+          </div>
+          {%- if block.settings.image != blank -%}
+            <div class="hero-slide__image">
+              <img
+                src="{{ block.settings.image | image_url: width: 900 }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                alt="{{ block.settings.heading | escape }}"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
             </div>
           {%- endif -%}
-          <h2>{{ block.settings.heading }}</h2>
-          <p>{{ block.settings.subheading }}</p>
-          <div class="hero-slide__buttons">
-            {%- if block.settings.button_1_text != blank -%}
-              <a href="{{ block.settings.button_1_link }}" class="btn btn--primary">{{ block.settings.button_1_text }}</a>
-            {%- endif -%}
-            {%- if block.settings.button_2_text != blank -%}
-              <a href="{{ block.settings.button_2_link }}" class="btn btn--outline">{{ block.settings.button_2_text }}</a>
-            {%- endif -%}
-          </div>
         </div>
-        {%- if block.settings.image != blank -%}
-          <div class="hero-slide__image">
-            <img
-              src="{{ block.settings.image | image_url: width: 900 }}"
-              width="{{ block.settings.image.width }}"
-              height="{{ block.settings.image.height }}"
-              alt="{{ block.settings.heading | escape }}"
-              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
-          </div>
-        {%- endif -%}
       {%- endif -%}
-    </div>
     {%- endfor -%}
   </div>
 
@@ -65,10 +67,8 @@
   "blocks": [
     {
       "type": "slide",
-      "name": "Slide",
+      "name": "Slide (text + buttons)",
       "settings": [
-        { "type": "checkbox", "id": "image_only", "label": "Show as full image (no text/buttons)", "default": false },
-        { "type": "url", "id": "image_link", "label": "Link (used when 'Show as full image' is on)", "info": "Where clicking the image should go, e.g. a collection" },
         { "type": "text", "id": "badge_text", "label": "Badge text", "default": "UP TO 20% OFF" },
         { "type": "text", "id": "heading", "label": "Heading", "default": "Freshness You Can Trust" },
         { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Wide range of fresh vegetables delivered to your door" },
@@ -78,6 +78,14 @@
         { "type": "url", "id": "button_1_link", "label": "Button 1 link" },
         { "type": "text", "id": "button_2_text", "label": "Button 2 text", "default": "View Offers" },
         { "type": "url", "id": "button_2_link", "label": "Button 2 link" }
+      ]
+    },
+    {
+      "type": "image_slide",
+      "name": "Image slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "url", "id": "link", "label": "Link", "info": "Where clicking the image should go, e.g. a collection" }
       ]
     }
   ],
