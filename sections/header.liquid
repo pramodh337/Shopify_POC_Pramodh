@@ -69,23 +69,25 @@
       </ul>
     </div>
 
-    <ul class="site-header__nav-list">
-      <li class="site-header__nav-offer">
-        <a href="{{ collections['offers'].url | default: '/collections/offers' }}">🔥 Offers</a>
-      </li>
-      {%- for link in linklists.main-menu.links -%}
-        <li class="{% if link.links != blank %}has-dropdown{% endif %}">
-          <a href="{{ link.url }}">{{ link.title }}</a>
-          {%- if link.links != blank -%}
-          <ul class="dropdown">
-            {%- for child in link.links -%}
-              <li><a href="{{ child.url }}">{{ child.title }}</a></li>
-            {%- endfor -%}
-          </ul>
-          {%- endif -%}
+    <div class="site-header__nav-scroll">
+      <ul class="site-header__nav-list">
+        <li class="site-header__nav-offer">
+          <a href="{{ collections['offers'].url | default: '/collections/offers' }}">🔥 Offers</a>
         </li>
-      {%- endfor -%}
-    </ul>
+        {%- for link in linklists.main-menu.links -%}
+          <li class="{% if link.links != blank %}has-dropdown{% endif %}">
+            <a href="{{ link.url }}">{{ link.title }}</a>
+            {%- if link.links != blank -%}
+            <ul class="dropdown">
+              {%- for child in link.links -%}
+                <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
 
     <div class="site-header__nav-tags">
       <a href="{{ collections['new-arrivals'].url | default: routes.all_products_collection_url }}" class="tag tag--yellow">New Arrivals</a>
