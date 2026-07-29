@@ -228,6 +228,13 @@
             "link": "shopify://collections/india-gate"
           }
         },
+        "brand_DJbxcW": {
+          "type": "brand",
+          "settings": {
+            "name": "Brand",
+            "link": ""
+          }
+        },
         "b4": {
           "type": "brand",
           "settings": {
@@ -239,14 +246,14 @@
           "type": "brand",
           "settings": {
             "name": "MDH",
-            "link": ""
+            "link": "shopify://collections/mdh"
           }
         },
         "b6": {
           "type": "brand",
           "settings": {
             "name": "BRU",
-            "link": ""
+            "link": "shopify://collections/bru"
           }
         }
       },
@@ -254,6 +261,7 @@
         "b1",
         "b2",
         "b3",
+        "brand_DJbxcW",
         "b4",
         "b5",
         "b6"
