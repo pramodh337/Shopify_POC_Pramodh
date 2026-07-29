@@ -14,6 +14,7 @@
       "blocks": {
         "slide_tGxdDV": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "badge_text": "UP TO 20% OFF",
             "heading": "Freshness You Can Trust",
