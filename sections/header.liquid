@@ -54,7 +54,7 @@
     <div class="site-header__category">
       <button class="site-header__nav-toggle" id="CategoryMenuToggle" aria-expanded="false" aria-controls="CategoryMenu">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-        Shop by Category
+        <span class="site-header__nav-toggle-label">Shop by Category</span>
       </button>
       <ul class="site-header__category-menu" id="CategoryMenu">
         <li><a href="{{ collections['fresh-vegetables'].url | default: routes.all_products_collection_url }}">Fresh Vegetables</a></li>

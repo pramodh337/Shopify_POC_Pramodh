@@ -5,13 +5,18 @@
         <div class="hero-slide hero-slide--image-only {% if forloop.first %}is-active{% endif %}" {{ block.shopify_attributes }}>
           <a href="{{ block.settings.link }}" class="hero-slide__full-link">
             {%- if block.settings.image != blank -%}
-              <img
-                src="{{ block.settings.image | image_url: width: 1600 }}"
-                width="{{ block.settings.image.width }}"
-                height="{{ block.settings.image.height }}"
-                alt="{{ block.settings.image.alt | default: 'Promotional slide' | escape }}"
-                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                class="hero-slide__full-image">
+              <picture>
+                {%- if block.settings.mobile_image != blank -%}
+                  <source media="(max-width: 640px)" srcset="{{ block.settings.mobile_image | image_url: width: 800 }}">
+                {%- endif -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 1600 }}"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  alt="{{ block.settings.image.alt | default: 'Promotional slide' | escape }}"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  class="hero-slide__full-image">
+              </picture>
             {%- endif -%}
           </a>
         </div>
@@ -36,12 +41,17 @@
           </div>
           {%- if block.settings.image != blank -%}
             <div class="hero-slide__image">
-              <img
-                src="{{ block.settings.image | image_url: width: 900 }}"
-                width="{{ block.settings.image.width }}"
-                height="{{ block.settings.image.height }}"
-                alt="{{ block.settings.heading | escape }}"
-                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+              <picture>
+                {%- if block.settings.mobile_image != blank -%}
+                  <source media="(max-width: 640px)" srcset="{{ block.settings.mobile_image | image_url: width: 500 }}">
+                {%- endif -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 900 }}"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  alt="{{ block.settings.heading | escape }}"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+              </picture>
             </div>
           {%- endif -%}
         </div>
@@ -73,6 +83,7 @@
         { "type": "text", "id": "heading", "label": "Heading", "default": "Freshness You Can Trust" },
         { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Wide range of fresh vegetables delivered to your door" },
         { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "image_picker", "id": "mobile_image", "label": "Mobile image (optional)", "info": "Shown on phones instead of the image above" },
         { "type": "color", "id": "bg_color", "label": "Background color", "default": "#DFF0D8" },
         { "type": "text", "id": "button_1_text", "label": "Button 1 text", "default": "Shop Now" },
         { "type": "url", "id": "button_1_link", "label": "Button 1 link" },
@@ -85,6 +96,7 @@
       "name": "Image slide",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "image_picker", "id": "mobile_image", "label": "Mobile image (optional)", "info": "Shown on phones instead of the image above" },
         { "type": "url", "id": "link", "label": "Link", "info": "Where clicking the image should go, e.g. a collection" }
       ]
     }
