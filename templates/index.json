@@ -87,6 +87,7 @@
         "c8": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Jul_29_2026_02_55_33_PM.png",
             "title": "Tea & Coffee",
             "link": "/collections/tea-coffee"
           }
