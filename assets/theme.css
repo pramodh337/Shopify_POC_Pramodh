@@ -226,8 +226,11 @@ ul { list-style: none; margin: 0; padding: 0; }
   border: 1px solid var(--color-border); border-radius: 10px; overflow: hidden; background: #fff;
   display: flex; flex-direction: column; height: 100%; position: relative;
 }
-.product-card__image-link { position: relative; display: block; }
-.product-card__image { width: 100%; aspect-ratio: 1/1; object-fit: cover; background: #f4f4f2; }
+.product-card__image-link { position: relative; display: block; width: 100%; padding-top: 100%; overflow: hidden; }
+.product-card__image {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover; background: #f4f4f2;
+}
 .product-card__badge {
   position: absolute; top: 10px; left: 10px; background: var(--color-accent-red); color: #fff;
   font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 4px; z-index: 2;
@@ -363,8 +366,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 .facet__link.is-active .facet__dot::after {
   content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--color-primary);
 }
-.collection-page__grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
-.collection-page__grid .product-card__image { aspect-ratio: 4/3; }
+.collection-page__grid { display: grid; grid-template-columns: repeat(6, minmax(0, 150px)); gap: 10px; }
 .collection-page__grid .product-card__info { padding: 8px; gap: 3px; }
 .collection-page__grid .product-card__title { min-height: 2.2em; }
 .pagination { grid-column: 1/-1; text-align: center; margin-top: 30px; }
@@ -431,7 +433,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   .collection-page__layout { grid-template-columns: 1fr; }
   .collection-page__filters { flex-direction: row; flex-wrap: wrap; }
   .facet { flex: 1; min-width: 160px; }
-  .collection-page__grid { grid-template-columns: repeat(4, 1fr); }
+  .collection-page__grid { grid-template-columns: repeat(4, minmax(0, 150px)); }
   .collections-list__grid { grid-template-columns: repeat(3, 1fr); }
   .product-page { grid-template-columns: 1fr; }
   .site-footer__top { grid-template-columns: repeat(2, 1fr); }
@@ -462,7 +464,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   .category-grid__item { flex: 0 0 84px; padding: 12px 6px; }
   .features-bar { grid-template-columns: 1fr; }
   .collection-page__filters { flex-direction: column; }
-  .collection-page__grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .collection-page__grid { grid-template-columns: repeat(3, minmax(0, 120px)); gap: 8px; }
   .collections-list__grid { grid-template-columns: repeat(2, 1fr); }
   .hero-slide { flex-direction: column; text-align: center; padding: 30px 20px; }
   .hero-slide__image { max-width: 80%; }
