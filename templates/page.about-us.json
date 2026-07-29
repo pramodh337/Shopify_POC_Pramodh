@@ -1,0 +1,34 @@
+{
+  "sections": {
+    "main": {
+      "type": "about-us",
+      "blocks": {
+        "r1": { "type": "reason", "settings": { "icon": "🥬", "text": "Fresh fruits and vegetables" } },
+        "r2": { "type": "reason", "settings": { "icon": "🌾", "text": "Premium rice, atta, and grains" } },
+        "r3": { "type": "reason", "settings": { "icon": "🌶️", "text": "Authentic Indian spices and masalas" } },
+        "r4": { "type": "reason", "settings": { "icon": "🥣", "text": "Wide range of dals and pulses" } },
+        "r5": { "type": "reason", "settings": { "icon": "🍪", "text": "Snacks, sweets, and ready-to-eat products" } },
+        "r6": { "type": "reason", "settings": { "icon": "❄️", "text": "Frozen foods and dairy products" } },
+        "r7": { "type": "reason", "settings": { "icon": "🚚", "text": "Fast and reliable delivery" } },
+        "r8": { "type": "reason", "settings": { "icon": "💳", "text": "Safe and secure online shopping" } },
+        "r9": { "type": "reason", "settings": { "icon": "⭐", "text": "Quality products at competitive prices" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9"],
+      "settings": {
+        "heading": "About Us",
+        "intro": "<p>Welcome to Pramodh Grocery, your trusted destination for authentic Indian groceries and everyday essentials in the UK.</p><p>We are passionate about bringing the rich flavours of India to your doorstep. From premium rice, atta, dals, spices, masalas, oils, and pickles to fresh vegetables, frozen foods, snacks, sweets, beverages, and household essentials, we carefully source products from trusted brands to ensure quality and freshness.</p><p>Our mission is simple: to make authentic Indian groceries easily accessible, affordable, and convenient for every household. Whether you're preparing traditional family recipes or exploring new flavours, we have everything you need in one place.</p>",
+        "why_heading": "Why Choose Us?",
+        "closing_text": "<p>We believe grocery shopping should be simple, enjoyable, and affordable. That's why we're committed to providing exceptional customer service, competitive pricing, and a seamless online shopping experience.</p><p>Whether you're looking for your favourite regional ingredients or everyday grocery essentials, Pramodh Grocery is here to serve you with quality products and dependable service.</p><p>Thank you for choosing us. We look forward to becoming your preferred Indian grocery store.</p>",
+        "mission_heading": "Our Mission",
+        "mission": "To deliver authentic Indian groceries with freshness, quality, and convenience while offering excellent customer service and great value.",
+        "vision_heading": "Our Vision",
+        "vision": "To become one of the UK's most trusted online Indian grocery stores by connecting communities with the flavours and traditions of home.",
+        "values_heading": "Our Values",
+        "values": "Quality First\nCustomer Satisfaction\nHonest Pricing\nFreshness Guaranteed\nReliable Delivery\nCommunity Focus",
+        "brand_name": "Pramodh Grocery",
+        "tagline": "Bringing the Taste of India to Your Home. 🇮🇳🥬🚚"
+      }
+    }
+  },
+  "order": ["main"]
+}

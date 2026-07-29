@@ -1,0 +1,99 @@
+<div class="about-us page-width">
+  <div class="about-us__intro">
+    <h1>{{ section.settings.heading }}</h1>
+    <div class="about-us__rich">{{ section.settings.intro }}</div>
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="about-us__why">
+      <h2>{{ section.settings.why_heading }}</h2>
+      <div class="about-us__why-grid">
+        {%- for block in section.blocks -%}
+          <div class="about-us__why-item" {{ block.shopify_attributes }}>
+            <span class="about-us__why-icon">{{ block.settings.icon }}</span>
+            <span>{{ block.settings.text }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.closing_text != blank -%}
+    <div class="about-us__rich about-us__closing">{{ section.settings.closing_text }}</div>
+  {%- endif -%}
+
+  <div class="about-us__cards">
+    <div class="about-us__card">
+      <h3>{{ section.settings.mission_heading }}</h3>
+      <p>{{ section.settings.mission }}</p>
+    </div>
+    <div class="about-us__card">
+      <h3>{{ section.settings.vision_heading }}</h3>
+      <p>{{ section.settings.vision }}</p>
+    </div>
+  </div>
+
+  {%- assign values = section.settings.values | newline_to_br | split: '<br />' -%}
+  {%- if values.size > 0 -%}
+    <div class="about-us__values">
+      <h3>{{ section.settings.values_heading }}</h3>
+      <ul>
+        {%- for value in values -%}
+          {%- assign value_trimmed = value | strip -%}
+          {%- if value_trimmed != blank -%}<li>{{ value_trimmed }}</li>{%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  {%- endif -%}
+
+  <div class="about-us__tagline">
+    <strong>{{ section.settings.brand_name }}</strong>
+    <p>{{ section.settings.tagline }}</p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About us",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "About Us" },
+    { "type": "richtext", "id": "intro", "label": "Intro text" },
+    { "type": "text", "id": "why_heading", "label": "\"Why choose us\" heading", "default": "Why Choose Us?" },
+    { "type": "richtext", "id": "closing_text", "label": "Closing text (shown below the reasons list)" },
+    { "type": "text", "id": "mission_heading", "label": "Mission heading", "default": "Our Mission" },
+    { "type": "textarea", "id": "mission", "label": "Mission text" },
+    { "type": "text", "id": "vision_heading", "label": "Vision heading", "default": "Our Vision" },
+    { "type": "textarea", "id": "vision", "label": "Vision text" },
+    { "type": "text", "id": "values_heading", "label": "Values heading", "default": "Our Values" },
+    { "type": "textarea", "id": "values", "label": "Values", "info": "One value per line" },
+    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "Pramodh Grocery" },
+    { "type": "text", "id": "tagline", "label": "Tagline" }
+  ],
+  "blocks": [
+    {
+      "type": "reason",
+      "name": "Reason",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Emoji / icon", "default": "⭐" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Reason" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About us",
+      "blocks": [
+        { "type": "reason", "settings": { "icon": "🥬", "text": "Fresh fruits and vegetables" } },
+        { "type": "reason", "settings": { "icon": "🌾", "text": "Premium rice, atta, and grains" } },
+        { "type": "reason", "settings": { "icon": "🌶️", "text": "Authentic Indian spices and masalas" } },
+        { "type": "reason", "settings": { "icon": "🥣", "text": "Wide range of dals and pulses" } },
+        { "type": "reason", "settings": { "icon": "🍪", "text": "Snacks, sweets, and ready-to-eat products" } },
+        { "type": "reason", "settings": { "icon": "❄️", "text": "Frozen foods and dairy products" } },
+        { "type": "reason", "settings": { "icon": "🚚", "text": "Fast and reliable delivery" } },
+        { "type": "reason", "settings": { "icon": "💳", "text": "Safe and secure online shopping" } },
+        { "type": "reason", "settings": { "icon": "⭐", "text": "Quality products at competitive prices" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
