@@ -12,6 +12,59 @@
     "hero": {
       "type": "hero-slideshow",
       "blocks": {
+        "slide_tGxdDV": {
+          "type": "slide",
+          "settings": {
+            "badge_text": "UP TO 20% OFF",
+            "heading": "Freshness You Can Trust",
+            "subheading": "Wide range of fresh vegetables delivered to your door",
+            "bg_color": "#dff0d8",
+            "button_1_text": "Shop Now",
+            "button_1_link": "",
+            "button_2_text": "View Offers",
+            "button_2_link": ""
+          }
+        },
+        "slide_pBwg7n": {
+          "type": "slide",
+          "settings": {
+            "badge_text": "UP TO 20% OFF",
+            "heading": "Freshness You Can Trust",
+            "subheading": "Wide range of fresh vegetables delivered to your door",
+            "bg_color": "#dff0d8",
+            "button_1_text": "Shop Now",
+            "button_1_link": "",
+            "button_2_text": "View Offers",
+            "button_2_link": ""
+          }
+        },
+        "slide_X4NjFC": {
+          "type": "slide",
+          "settings": {
+            "badge_text": "UP TO 20% OFF",
+            "heading": "Freshness You Can Trust",
+            "subheading": "Wide range of fresh vegetables delivered to your door",
+            "bg_color": "#dff0d8",
+            "button_1_text": "Shop Now",
+            "button_1_link": "",
+            "button_2_text": "View Offers",
+            "button_2_link": ""
+          }
+        },
+        "slide_W8TwyB": {
+          "type": "slide",
+          "settings": {
+            "badge_text": "UP TO 20% OFF",
+            "heading": "Freshness You Can Trust",
+            "subheading": "Wide range of fresh vegetables delivered to your door",
+            "image": "shopify://shop_images/weekly-offers-with-end-of-the-image-with-grocceries-and-vegetables.png",
+            "bg_color": "#dff0d8",
+            "button_1_text": "Shop Now",
+            "button_1_link": "",
+            "button_2_text": "View Offers",
+            "button_2_link": ""
+          }
+        },
         "slide1": {
           "type": "slide",
           "settings": {
@@ -27,6 +80,10 @@
         }
       },
       "block_order": [
+        "slide_tGxdDV",
+        "slide_pBwg7n",
+        "slide_X4NjFC",
+        "slide_W8TwyB",
         "slide1"
       ],
       "settings": {}
