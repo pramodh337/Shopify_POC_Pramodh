@@ -45,6 +45,7 @@
         "c2": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/fruit-white-background-24878035.webp",
             "title": "Fruits",
             "link": "/collections/fruits"
           }
@@ -52,6 +53,7 @@
         "c3": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Jul_29_2026_02_53_59_PM.png",
             "title": "Rice & Grains",
             "link": "/collections/rice-grains"
           }
@@ -59,6 +61,7 @@
         "c4": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Jul_29_2026_02_52_30_PM.png",
             "title": "Atta & Flour",
             "link": "/collections/atta-flour"
           }
