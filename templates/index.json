@@ -28,40 +28,22 @@
         "slide_pBwg7n": {
           "type": "slide",
           "settings": {
-            "badge_text": "UP TO 20% OFF",
-            "heading": "Freshness You Can Trust",
-            "subheading": "Wide range of fresh vegetables delivered to your door",
-            "bg_color": "#dff0d8",
-            "button_1_text": "Shop Now",
-            "button_1_link": "",
-            "button_2_text": "View Offers",
-            "button_2_link": ""
+            "image_only": true,
+            "image_link": ""
           }
         },
         "slide_X4NjFC": {
           "type": "slide",
           "settings": {
-            "badge_text": "UP TO 20% OFF",
-            "heading": "Freshness You Can Trust",
-            "subheading": "Wide range of fresh vegetables delivered to your door",
-            "bg_color": "#dff0d8",
-            "button_1_text": "Shop Now",
-            "button_1_link": "",
-            "button_2_text": "View Offers",
-            "button_2_link": ""
+            "image_only": true,
+            "image_link": ""
           }
         },
         "slide1": {
           "type": "slide",
           "settings": {
-            "badge_text": "UP TO 20% OFF",
-            "heading": "Freshness You Can Trust",
-            "subheading": "Wide range of fresh vegetables delivered to your door",
-            "bg_color": "#dff0d8",
-            "button_1_text": "Shop Now",
-            "button_1_link": "/collections/all",
-            "button_2_text": "View Offers",
-            "button_2_link": "/collections/offers"
+            "image_only": true,
+            "image_link": ""
           }
         }
       },
