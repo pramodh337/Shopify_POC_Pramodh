@@ -1,20 +1,24 @@
 <div class="category-grid-wrap page-width">
-  <div class="category-grid">
-    {%- for block in section.blocks -%}
-      <a href="{{ block.settings.link }}" class="category-grid__item" {{ block.shopify_attributes }}>
-        <div class="category-grid__image">
-          {%- if block.settings.image != blank -%}
-            <img
-              src="{{ block.settings.image | image_url: width: 200 }}"
-              width="{{ block.settings.image.width }}"
-              height="{{ block.settings.image.height }}"
-              alt="{{ block.settings.title | escape }}"
-              loading="lazy">
-          {%- endif -%}
-        </div>
-        <span>{{ block.settings.title }}</span>
-      </a>
-    {%- endfor -%}
+  <div class="category-grid__row" data-scroll-row>
+    <button class="row-arrow row-arrow--prev" data-row-prev aria-label="Scroll left">{% render 'icon-chevron-left' %}</button>
+    <div class="category-grid" data-product-row>
+      {%- for block in section.blocks -%}
+        <a href="{{ block.settings.link }}" class="category-grid__item" {{ block.shopify_attributes }}>
+          <div class="category-grid__image">
+            {%- if block.settings.image != blank -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 200 }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                alt="{{ block.settings.title | escape }}"
+                loading="lazy">
+            {%- endif -%}
+          </div>
+          <span>{{ block.settings.title }}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+    <button class="row-arrow row-arrow--next" data-row-next aria-label="Scroll right">{% render 'icon-chevron-right' %}</button>
   </div>
 </div>
 

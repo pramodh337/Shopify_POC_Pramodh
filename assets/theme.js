@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* ---------- Product row horizontal scroll ---------- */
   document.querySelectorAll('[data-product-row]').forEach(function (row) {
-    var wrap = row.closest('.featured-collection__row');
+    var wrap = row.closest('[data-scroll-row]');
     if (!wrap) return;
     var prev = wrap.querySelector('[data-row-prev]');
     var next = wrap.querySelector('[data-row-next]');
@@ -32,14 +32,49 @@ document.addEventListener('DOMContentLoaded', function () {
     if (next) next.addEventListener('click', function () { row.scrollBy({ left: 260, behavior: 'smooth' }); });
   });
 
-  /* ---------- Category menu toggle (mobile) ---------- */
+  /* ---------- Shop by Category dropdown ---------- */
   var catToggle = document.getElementById('CategoryMenuToggle');
-  if (catToggle) {
-    catToggle.addEventListener('click', function () {
-      var list = document.querySelector('.site-header__nav-list');
-      if (list) list.style.display = list.style.display === 'flex' ? 'none' : 'flex';
+  var catMenu = document.getElementById('CategoryMenu');
+  if (catToggle && catMenu) {
+    catToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = catMenu.classList.toggle('is-open');
+      catToggle.setAttribute('aria-expanded', isOpen);
+    });
+    document.addEventListener('click', function (e) {
+      if (!catMenu.contains(e.target) && e.target !== catToggle) {
+        catMenu.classList.remove('is-open');
+        catToggle.setAttribute('aria-expanded', 'false');
+      }
     });
   }
+
+  /* ---------- Facet "All" option + See more (collection filters) ---------- */
+  document.querySelectorAll('[data-facet-list]').forEach(function (list) {
+    var allInput = list.querySelector('[data-facet-all]');
+    var checkboxes = list.querySelectorAll('input[type="checkbox"]');
+    if (allInput) {
+      allInput.addEventListener('click', function () {
+        checkboxes.forEach(function (cb) { cb.checked = false; });
+        allInput.form.submit();
+      });
+    }
+    checkboxes.forEach(function (cb) {
+      cb.addEventListener('change', function () {
+        if (allInput) allInput.checked = false;
+      });
+    });
+  });
+  document.querySelectorAll('[data-facet-toggle]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var facet = btn.closest('.facet__body');
+      var extras = facet.querySelectorAll('.facet__extra');
+      var expanded = btn.dataset.expanded === 'true';
+      extras.forEach(function (li) { li.hidden = expanded; });
+      btn.dataset.expanded = expanded ? 'false' : 'true';
+      btn.textContent = expanded ? 'See more' : 'See less';
+    });
+  });
 
   /* ---------- Product page: image thumbnails ---------- */
   document.querySelectorAll('.product-page__thumb').forEach(function (thumb) {

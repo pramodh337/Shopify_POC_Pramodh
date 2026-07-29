@@ -1,4 +1,4 @@
-{%- comment -%} Expects: product {%- endcomment -%}
+{%- comment -%} Expects: product. Optional: hide_button (bool, hides the add-to-cart button for compact grids) {%- endcomment -%}
 <div class="product-card">
   <a href="{{ product.url }}" class="product-card__image-link">
     {%- if product.compare_at_price > product.price and settings.show_badge -%}
@@ -30,15 +30,17 @@
         <span class="price price--compare">{{ product.compare_at_price | money }}</span>
       {%- endif -%}
     </div>
-    {%- if product.available -%}
-      {%- form 'product', product -%}
-        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-        <button type="submit" class="btn btn--primary btn--small btn--full" name="add">
-          {{ 'products.product.add_to_cart' | t }}
-        </button>
-      {%- endform -%}
-    {%- else -%}
-      <button class="btn btn--disabled btn--small btn--full" disabled>{{ 'products.product.sold_out' | t }}</button>
-    {%- endif -%}
+    {%- unless hide_button -%}
+      {%- if product.available -%}
+        {%- form 'product', product -%}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="btn btn--primary btn--small btn--full" name="add">
+            {{ 'products.product.add_to_cart' | t }}
+          </button>
+        {%- endform -%}
+      {%- else -%}
+        <button class="btn btn--disabled btn--small btn--full" disabled>{{ 'products.product.sold_out' | t }}</button>
+      {%- endif -%}
+    {%- endunless -%}
   </div>
 </div>

@@ -25,47 +25,94 @@
 
     <div class="collection-page__layout">
       <aside class="collection-page__filters">
+        {%- assign has_active_filters = false -%}
         {%- for filter in collection.filters -%}
-          <details class="facet" open>
-            <summary>{{ filter.label }}</summary>
-            <div class="facet__body">
-              {%- case filter.type -%}
-                {%- when 'price_range' -%}
-                  <div class="facet__price-range">
-                    <input type="number" inputmode="decimal" name="{{ filter.min_value.param_name }}" placeholder="{{ filter.range_min | money_without_currency }}" value="{{ filter.min_value.value }}">
-                    <span>to</span>
-                    <input type="number" inputmode="decimal" name="{{ filter.max_value.param_name }}" placeholder="{{ filter.range_max | money_without_currency }}" value="{{ filter.max_value.value }}">
-                  </div>
-                {%- else -%}
-                  <ul>
-                    {%- for value in filter.values -%}
-                      <li>
-                        <label>
-                          <input
-                            type="checkbox"
-                            name="{{ value.param_name }}"
-                            value="{{ value.value }}"
-                            onchange="this.form.submit()"
-                            {% if value.active %}checked{% endif %}
-                            {% if value.count == 0 and value.active == false %}disabled{% endif %}>
-                          {{ value.label }} ({{ value.count }})
-                        </label>
-                      </li>
-                    {%- endfor -%}
-                  </ul>
-              {%- endcase -%}
+          {%- for value in filter.values -%}
+            {%- if value.active -%}{%- assign has_active_filters = true -%}{%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+
+        {%- if has_active_filters -%}
+          <div class="facet-active">
+            <h4>Filtered by</h4>
+            <div class="facet-active__chips">
+              {%- for filter in collection.filters -%}
+                {%- for value in filter.values -%}
+                  {%- if value.active -%}
+                    <a href="{{ value.url_to_remove }}" class="facet-active__chip">{{ value.label }} <span aria-hidden="true">&times;</span></a>
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endfor -%}
             </div>
-          </details>
+            <a href="{{ collection.url }}{% if collection.sort_by %}?sort_by={{ collection.sort_by }}{% endif %}" class="facet-active__clear">Clear filters</a>
+          </div>
+        {%- endif -%}
+
+        <div class="facet">
+          <h4 class="facet__title">Category</h4>
+          <div class="facet__body">
+            <ul class="facet__list facet__list--links">
+              {%- assign categories = 'Fresh Vegetables:fresh-vegetables,Fruits:fruits,Rice & Grains:rice-grains,Atta & Flour:atta-flour,Dal & Pulses:dal-pulses,Spices:spices,Snacks:snacks,Tea & Coffee:tea-coffee,Frozen Foods:frozen-foods' | split: ',' -%}
+              {%- for category in categories -%}
+                {%- assign category_parts = category | split: ':' -%}
+                {%- assign category_title = category_parts.first -%}
+                {%- assign category_handle = category_parts.last -%}
+                <li>
+                  <a href="{{ collections[category_handle].url | default: routes.all_products_collection_url }}" class="facet__link{% if collection.handle == category_handle %} is-active{% endif %}">
+                    <span class="facet__dot"></span>{{ category_title | escape }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+
+        {%- for filter in collection.filters -%}
+          {%- unless filter.type == 'price_range' -%}
+            <div class="facet">
+              <h4 class="facet__title">{{ filter.label }}</h4>
+              <div class="facet__body">
+                {%- assign filter_has_active = false -%}
+                {%- for value in filter.values -%}
+                  {%- if value.active -%}{%- assign filter_has_active = true -%}{%- endif -%}
+                {%- endfor -%}
+                <ul class="facet__list" data-facet-list>
+                  <li class="facet__all">
+                    <label>
+                      <input type="radio" data-facet-all {% unless filter_has_active %}checked{% endunless %}>
+                      All
+                    </label>
+                  </li>
+                  {%- for value in filter.values -%}
+                    <li{% if forloop.index > 6 %} class="facet__extra" hidden{% endif %}>
+                      <label>
+                        <input
+                          type="checkbox"
+                          name="{{ value.param_name }}"
+                          value="{{ value.value }}"
+                          onchange="this.form.submit()"
+                          {% if value.active %}checked{% endif %}
+                          {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                        {{ value.label }} ({{ value.count }})
+                      </label>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+                {%- if filter.values.size > 6 -%}
+                  <button type="button" class="facet__see-more" data-facet-toggle>See more</button>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endunless -%}
         {%- endfor -%}
         {%- if collection.filters.size > 0 -%}
           <button type="submit" class="btn btn--primary btn--small btn--full">Apply filters</button>
-          <a href="{{ collection.url }}{% if collection.sort_by %}?sort_by={{ collection.sort_by }}{% endif %}" class="collection-page__clear-filters">Clear all</a>
         {%- endif -%}
       </aside>
 
       <div class="collection-page__grid">
         {%- for product in collection.products -%}
-          {% render 'product-card', product: product %}
+          {% render 'product-card', product: product, hide_button: true %}
         {%- else -%}
           <p>{{ 'collections.general.no_products' | t }}</p>
         {%- endfor -%}
