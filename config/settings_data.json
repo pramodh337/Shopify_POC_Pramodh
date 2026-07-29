@@ -1,17 +1,49 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
+    "logo": "shopify://shop_images/ChatGPT_Image_Jul_28_2026_02_55_51_PM.png",
+    "logo_width": 80,
     "color_primary": "#1E7A34",
     "color_primary_dark": "#145C26",
     "color_accent_red": "#E12026",
     "color_accent_yellow": "#F5C518",
     "color_text": "#222222",
     "color_background": "#FFFFFF",
-    "logo_width": 150,
     "show_announcement": true,
     "announcement_1": "Free Delivery on orders over £50",
     "announcement_2": "Same Day Delivery in Select Areas*",
     "announcement_3": "WhatsApp Support 07700 123456",
+    "social_facebook": "facebook.com",
+    "social_instagram": "instagram.com",
+    "social_twitter": "x.com",
     "show_vendor": false,
-    "show_badge": true
+    "show_badge": true,
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {}
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "deliver_to": "M1 1AE"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "about_text": "Fresh groceries, trusted quality, delivered to your door."
+        }
+      }
+    },
+    "content_for_index": []
   }
 }
